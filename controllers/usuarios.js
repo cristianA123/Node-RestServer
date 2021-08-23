@@ -106,3 +106,7 @@ module.exports = {
     usuariosPath,
     usuariosDelete
 }
+
+
+// git tag -a v0.0.2 -m "modulo 9 terminado"
+// $ git push --tags
