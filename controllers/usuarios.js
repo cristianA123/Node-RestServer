@@ -107,6 +107,10 @@ module.exports = {
     usuariosDelete
 }
 
-
+// PARA CREAR UN TAG
 // git tag -a v0.0.2 -m "modulo 9 terminado"
 // $ git push --tags
+
+// PARA QUITAR EL SEGUIMIENTO DEL GIT
+//git rm .env --cached
+// *** agregar el archivo al gitignore , luego add, and commit
