@@ -9,4 +9,5 @@ router.get('/:coleccion/:termino', buscar)
 
 
 
+
 module.exports = router
