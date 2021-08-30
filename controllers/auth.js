@@ -36,7 +36,7 @@ const login = async ( req=request, res= response) =>{
             return   res.status(400).json({
                         msg:'Usuario / Password incorrectos - password',
                         correo
-                    })
+            })
         }
 
 
@@ -64,9 +64,6 @@ const googleSignin = async ( req = request , res= response )=>{
 
 
     const { id_token } = req.body;
-
-    
-
 
     try {
 
@@ -100,7 +97,7 @@ const googleSignin = async ( req = request , res= response )=>{
         }
         let a = usuario.id;
         //Generar el JWT
-        const token = await generarJWT( usuario.id );
+        const token = await generarJWT( usuario.uid );
 
         return res.json({
             msg : 'Todo ok! , miau',
