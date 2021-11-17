@@ -124,9 +124,39 @@ const googleSignin = async ( req = request , res= response )=>{
 
 }
 
+const RenovarJWT = async (req = request , res= response )=>{
+
+    const usuario = req.usuario;
+
+
+    try {
+
+        // Generar el JWT
+        const token = await generarJWT( usuario.id );
+
+        res.json({
+            token,
+            usuario
+            
+        })
+        // id_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgxOWQxZTYxNDI5ZGQzZDNjYWVmMTI5YzBhYzJiYWU4YzZkNDZmYmMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTU5NjgyMDMwMTU2LWkxYTRmbGFtZ3Y3OG8xMDdndjN1ZnJmMnQ3b2tramZuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTU5NjgyMDMwMTU2LWkxYTRmbGFtZ3Y3OG8xMDdndjN1ZnJmMnQ3b2tramZuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEzNzE4Nzg3ODAyOTI1Njc2MjA4IiwiaGQiOiJ1bnRlbHMuZWR1LnBlIiwiZW1haWwiOiIyMDE3MjMwNDI4QHVudGVscy5lZHUucGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IjhDc2NpZjd0UkNvdlY0WUgwU1pMcWciLCJuYW1lIjoiQ1JJU1RJQU4gQUxFWElTIENISVBBTkEgSFVBTUFOIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdqdU5aVUh4NVpCMjYwVzJSakNNVWtobDBoOHVVTXpRcUlfd2psST1zOTYtYyIsImdpdmVuX25hbWUiOiJDUklTVElBTiBBTEVYSVMiLCJmYW1pbHlfbmFtZSI6IkNISVBBTkEgSFVBTUFOIiwibG9jYWxlIjoiZXMiLCJpYXQiOjE2MzAwODUzMTEsImV4cCI6MTYzMDA4ODkxMSwianRpIjoiMmViN2Y5NTJlY2QzYTNhNjE1NjIzNDc2ODE1NGIzZThkZjk2MThiZiJ9.FfmjM8aZhPnQD4ThlSmfN3kDA2yS8J3nBkjpKfxz_AU9tTbVuapvRYfyIj5jWzTSDCM1DI0pcaQyvWuBNitQEGCD8eKfQ1a6Fsd89ibSK9zfZGnJ0FObeQ7DEaN7ADRjafeBdCGub6XbgF2NzzzaNCx35TW_vjnT3JE6mTqXA1_5xUgkA_3Lo5nAhBewRMVS8Wb0y2qaVGFpz6i4DUv0zGd3DJpCBDxT33C2PhGWB2vLYj7fUCXP0LBeayBZ4YtpbrbPXN7CZerRt2rxjHY6rUfgU63-iugLRSsu_FuR3HEQKQeT4-i1eoXh7GL_j0z_WJYGA04E8zQindslSfPE5g"
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            msg:'Hable con el Admi'
+        })
+    }
+
+
+
+}
+
 
 
 module.exports = {
       login,
-      googleSignin
+      googleSignin,
+      RenovarJWT
 }
