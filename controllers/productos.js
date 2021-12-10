@@ -100,12 +100,24 @@ const actualizarProducto = async (req = request, res =response ) => {
         })
     }
 
-    if( nombrebica ){
-        return res.status( 404).json({
-            msg:"El producto ya existe - romel mmgvzo!!"
-        });
-    }
+    // if( nombrebica ){
+    //     return res.status( 404).json({
+    //         msg:"El producto ya existe - romel mmgvzo!!"
+    //     });
+    // }
 
+    const productoID = await Producto.findById(id)
+
+    if(productoID.nombre!==nombre){
+        const productoDB = await Producto.findOne({ nombre });
+
+      //  Si el producto existe
+        if (productoDB) {
+          return res.status(400).json({
+            msg:`  La Producto ${productoDB.nombre}, ya existe, Romel mmgvzo!!`,
+          });
+        }
+      }
 
     const productomodificado = await Producto.findByIdAndUpdate(
         id, 

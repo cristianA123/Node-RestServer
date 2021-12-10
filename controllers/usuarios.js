@@ -55,12 +55,11 @@ const usuariosPut = async (req = request, res =response ) => {
     });
 }
 
+
 const usuariosPost = async (req, res =response) => {
 
-  
-
-    const { nombre, correo, password, rol } = req.body;
-    const usuario = new Usuario( { nombre, correo, password, rol } );
+    const { nombre, correo, password, rol , img} = req.body;
+    const usuario = new Usuario( { nombre, correo, password, rol, img } );
 
     // Emcriptar la contraseña
     const salt = bcryptjs.genSaltSync();
@@ -75,12 +74,16 @@ const usuariosPost = async (req, res =response) => {
         usuario
     });
 }
+
 const usuariosPath   =(req, res) => {
     res.json({
         'ok':true,
         msg: 'PATCH API'
     })
 }
+
+
+
 const usuariosDelete = async (req, res) => {
 
     const { id } = req.params;

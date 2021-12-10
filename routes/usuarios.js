@@ -38,6 +38,7 @@ router.post('/',
         check('correo' ).custom(emailExiste),
         check('nombre', 'Nombre es necesario' ).not().isEmpty(),
         check('password', 'La contraseña debe de tener 6 letras como minimo').isLength({ min:6 }),
+        check('img', 'La imagen es requerida').not().isEmpty(),
         // check('rol', 'No es un rol valido' ).isIn( ["ADMI_ROLE","USER_ROLE"] ),
         check('rol').custom( esRoleValido ),
         validarCampos
