@@ -83,7 +83,7 @@ const crearProducto = async (req, res =response) => {
 const actualizarProducto = async (req = request, res =response ) => {
 
     const id = req.params.id;
-    const {precio, descripcion, disponible ,categoria} = req.body;
+    const {precio, descripcion, disponible ,categoria, img} = req.body;
 
     const nombre = req.body.nombre.toUpperCase();
 
@@ -126,6 +126,7 @@ const actualizarProducto = async (req = request, res =response ) => {
             precio,
             descripcion,
             disponible,
+            img
         },
         { new: true })
 
