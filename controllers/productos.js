@@ -11,8 +11,8 @@ const obtnerProductos = async (req = request, res= response) => {
     const [total, productos] = await Promise.all([
         Producto.countDocuments( { estado : true }),
         
-        Producto.find( { estado : true }).populate( "usuario" )
-            .populate('categoria')
+        Producto.find( { estado : true }).populate( "usuario",["_id" ] )
+            .populate('categoria',["_id", "usuario"])
     ]);
 
     res.json({
@@ -83,7 +83,15 @@ const crearProducto = async (req, res =response) => {
 const actualizarProducto = async (req = request, res =response ) => {
 
     const id = req.params.id;
-    const {precio, descripcion, disponible ,categoria, img} = req.body;
+    const {precio, 
+        descripcion, 
+        disponible ,
+        categoria, 
+        img,
+        idProducto,
+        mac,
+        activo
+    } = req.body;
 
     const nombre = req.body.nombre.toUpperCase();
 
@@ -93,7 +101,6 @@ const actualizarProducto = async (req = request, res =response ) => {
     } )
 
     const validarestadocategoria = await Categoria.findById(categoria);
-    console.log(validarestadocategoria.estado);
     if(!validarestadocategoria.estado){
         return res.status( 400 ).json({
             msg:"Verifique el estado de la categoria"
@@ -126,7 +133,10 @@ const actualizarProducto = async (req = request, res =response ) => {
             precio,
             descripcion,
             disponible,
-            img
+            img,
+            idProducto,
+            mac,
+            activo
         },
         { new: true })
 

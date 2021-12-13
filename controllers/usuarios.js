@@ -89,7 +89,7 @@ const usuariosDelete = async (req, res) => {
     const { id } = req.params;
 
     const uid = req.uid;
-    // Fisicamente lo barram,ps
+    // Fisicamente lo borra,ps
     // const usuario = await Usuario.findByIdAndDelete( id );
     
     const usuario = await Usuario.findByIdAndUpdate( id, { estado :false } , { new : true } )

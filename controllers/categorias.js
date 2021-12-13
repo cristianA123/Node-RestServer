@@ -20,7 +20,7 @@ const obtnerCategorias = async (req = request, res= response) => {
     const [total, categorias] = await Promise.all([
         Categoria.countDocuments( { estado : true }),
         
-        Categoria.find( { estado : true }).populate( "usuario" )
+        Categoria.find( { estado : true }).populate( "usuario", ["_id"] )
             .skip( Number( desde ) )  
             .limit( Number(  limit))
     ]);

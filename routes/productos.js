@@ -38,19 +38,28 @@ router.post('/',
     check('categoria',"No es ID valido de mongo").isMongoId(),
     check('categoria').custom( existeCategoria ),
     check( "nombre","El nombre es obligatorio" ).not().isEmpty(),
-    // check( "precio","El precio es obligatorio" ).not().isEmpty(),
-    // check( "descripcion","El descripcion es obligatorio" ).not().isEmpty(),
+    check( "precio","El precio es obligatorio" ).not().isEmpty(),
+    check( "descripcion","El descripcion es obligatorio" ).not().isEmpty(),
+    check( "idProducto","El idProducto es obligatorio" ).not().isEmpty(),
+    check( "mac","La mac es obligatorio" ).not().isEmpty(),
+    check( "activo","El activo del producto es obligatorio" ).not().isEmpty(),
     // check( "disponible","El disponible es obligatorio" ).not().isEmpty(),
     validarCampos
 ]
 ,crearProducto);
 
 
-// actualizar p´rivado cualquiera con token valido
+// actualizar privado cualquiera con token valido
 router.put('/:id',[
     validarJWT,
     check('id',"No es ID valido").isMongoId(),
     check('id').custom( existeProducto ),
+    check( "nombre","El nombre es obligatorio" ).not().isEmpty(),
+    check( "precio","El precio es obligatorio" ).not().isEmpty(),
+    check( "descripcion","El descripcion es obligatorio" ).not().isEmpty(),
+    check( "idProducto","El idProducto es obligatorio" ).not().isEmpty(),
+    check( "mac","La mac es obligatorio" ).not().isEmpty(),
+    check( "activo","El activo del producto es obligatorio" ).not().isEmpty(),
     validarCampos
 ],actualizarProducto)
 
@@ -60,7 +69,7 @@ router.delete('/:id',[
     validarJWT,
     esAdminRole,
     check('id',"No es ID valido").isMongoId(),
-    // check('id').custom( existeCategoria ),
+    check('id').custom( existeCategoria ),
     // check('id').custom( estadoActivoCategoria ),
     validarCampos
 ], borrarProducto)

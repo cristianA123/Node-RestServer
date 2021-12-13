@@ -31,6 +31,19 @@ const ProductoSchema = Schema({
     descripcion :{ type: String },
     disponible:{type: Boolean, default: true},
     img:{ type: String },
+    idProducto:{
+        type: String,
+        require: [true, "El idProducto es obligatorio"],
+    },
+    mac:{
+        type: String,
+        require: [true, "La mac es obligatorio"],
+    },
+    activo:{
+        type: Boolean,
+        default: true,
+        required : [true, "El activo del producto es obligatorio"],
+    },
 
 });
 

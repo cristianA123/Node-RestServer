@@ -17,6 +17,7 @@ class Server{
             productos : "/api/productos", 
             buscar : "/api/buscar", 
             uploads : "/api/uploads", 
+            roles : "/api/roles", 
 
         }
         // this.usuariosPath ="/api/usuarios" 
@@ -66,6 +67,7 @@ class Server{
         this.app.use( this.paths.buscar, require('../routes/buscar.js') );
         this.app.use( this.paths.usuario, require('../routes/usuarios.js') );
         this.app.use( this.paths.uploads, require('../routes/uploads.js') );
+        this.app.use( this.paths.roles, require('../routes/roles.js') );
 
     }
 
