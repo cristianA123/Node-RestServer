@@ -20,7 +20,6 @@ const usuariosGet = async (req = request, res= response) => {
 
 
 //Esto es una consulta mas rapida
-
     const [total, usuario] = await Promise.all([
         Usuario.countDocuments( { estado : true }),
         Usuario.find( { estado : true })
