@@ -4,7 +4,7 @@ const { Role } = require('../models');
 
 const obtenerRoles = async (req = request, res = response) => {
 
-    const roles = await Role.find();
+    const roles = await Role.find({estado:true});
 
     res.json({
         roles
