@@ -25,12 +25,11 @@ router.get('/', usuariosGet);
 
 router.put('/:id',
 [
-        check('id',"No es ID valido").isMongoId(),
+        check('id',"El id del usuario no es ID valido").isMongoId(),
         check('id').custom(existeUsuariPorId),
         check('rol',"El rol es obligatorio").not().isEmpty(),
         check('nombre',"El rol es obligatorio").not().isEmpty(),
         check('correo',"El rol es obligatorio").not().isEmpty(),
-        check('password',"El rol es obligatorio").not().isEmpty(),
         check('rol').custom( esRoleValido ),
         validarCampos
 ],
@@ -54,7 +53,7 @@ router.delete('/:id',
         validarJWT,
         // esAdminRole,
         tieneRole('ADMIN_ROLE','VENTAS_ROLE'),
-        check('id',"No es ID valido").isMongoId(),
+        check('id',"El id del usuario no es ID valido").isMongoId(),
         check('id').custom(existeUsuariPorId),
         validarCampos
 

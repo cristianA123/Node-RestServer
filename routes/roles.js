@@ -14,7 +14,7 @@ router.get('/' , obtenerRoles)
 //Obtener Rol
 router.get('/:id',
 [
-    check('id',"No es ID valido").isMongoId() ,
+    check('id',"El id del rol no es ID valido").isMongoId() ,
     check('id').custom( existeRolporID ),
     validarCampos
 ]
@@ -35,7 +35,7 @@ router.post('/',
 router.put('/:id',
 [
     validarJWT,
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id del rol no es ID valido").isMongoId() ,
     check('id').custom( existeRolporID ),
     validarCampos
 ]
@@ -48,17 +48,11 @@ router.delete('/:id',
 [
     validarJWT,
     esAdminRole,
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id del rol no es ID valido").isMongoId() ,
     check('id').custom( existeRolporID ),
     validarCampos
 ]
 , eliminarRol)
-
-
-
-
-
-
 
 
 module.exports = router;

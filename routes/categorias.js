@@ -14,7 +14,7 @@ router.get('/',obtnerCategorias)
 
 router.get('/:id',
 [
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id de la categoria no es ID valido").isMongoId(),
     check('id').custom( existeCategoria ),
     validarCampos
 ]
@@ -33,8 +33,8 @@ router.post('/',
 // actualizar p´rivado cualquiera con token valido
 router.put('/:id',[
     validarJWT,
-    check('id',"No es ID valido").isMongoId(),
-    check('nombre',"Falva el nombre en el body").not().isEmpty(),
+    check('id',"El id de la categoria no es ID valido").isMongoId(),
+    check('nombre',"Falva el campo nombre ").not().isEmpty(),
     check('id').custom( existeCategoria ),
     validarCampos
 ],actualizarCategoria)
@@ -44,7 +44,7 @@ router.put('/:id',[
 router.delete('/:id',[
     validarJWT,
     esAdminRole,
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id de la categoria no es ID valido").isMongoId(),
     check('id').custom( existeCategoria ),
     check('id').custom( estadoActivoCategoria ),
     validarCampos

@@ -37,7 +37,6 @@ const obtnerProducto = async (req = request, res= response) => {
 
     res.json({
         producto,
-        msg : "Holiotas" 
     });
 };
 
@@ -49,6 +48,11 @@ const crearProducto = async (req, res =response) => {
 
     const productoBD = await Producto.findOne( { nombre } );
 
+    if( productoBD ){
+        return res.status( 400 ).json({
+            msg:" Ya existe producto - !productoBD "
+        })
+    }
     const validarestadocategoria = await Categoria.findById( body.categoria );
 
     if(!validarestadocategoria.estado){
@@ -56,14 +60,6 @@ const crearProducto = async (req, res =response) => {
             msg:"Verifique el estado de la categoria"
         })
     }
-
-    if( productoBD ){
-        return res.status( 400 ).json({
-            msg:" Ya existe producto - !productoBD "
-        })
-    }
-
-    
 
     const data = {
         nombre,
@@ -107,7 +103,7 @@ const actualizarProducto = async (req = request, res =response ) => {
         })
     }
 
-    // if( nombrebica ){
+    // if( nombrebica ){89
     //     return res.status( 404).json({
     //         msg:"El producto ya existe - romel mmgvzo!!"
     //     });

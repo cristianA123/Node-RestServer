@@ -24,7 +24,7 @@ router.get('/',obtnerProductos)
 
 router.get('/:id',
 [
-    check('id',"No es ID valido").isMongoId() ,
+    check('id',"El id del producto no es ID valido").isMongoId() ,
     check('id').custom( existeProductoporId ),
     // check('id').custom( estadoActivoProducto ),
     validarCampos
@@ -35,7 +35,7 @@ router.get('/:id',
 router.post('/', 
 [
     validarJWT,
-    check('categoria',"No es ID valido de mongo").isMongoId(),
+    check('categoria',"El valor de categoria no es ID valido de mongo").isMongoId(),
     check('categoria').custom( existeCategoria ),
     check( "nombre","El nombre es obligatorio" ).not().isEmpty(),
     check( "precio","El precio es obligatorio" ).not().isEmpty(),
@@ -52,7 +52,7 @@ router.post('/',
 // actualizar privado cualquiera con token valido
 router.put('/:id',[
     validarJWT,
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id del producto no es ID valido").isMongoId() ,
     check('id').custom( existeProducto ),
     check( "nombre","El nombre es obligatorio" ).not().isEmpty(),
     check( "precio","El precio es obligatorio" ).not().isEmpty(),
@@ -68,7 +68,7 @@ router.put('/:id',[
 router.delete('/:id',[
     validarJWT,
     esAdminRole,
-    check('id',"No es ID valido").isMongoId(),
+    check('id',"El id del producto no es ID valido").isMongoId() ,
     check('id').custom( existeCategoria ),
     // check('id').custom( estadoActivoCategoria ),
     validarCampos
