@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const { crearProducto, 
         obtnerProductos, 
         obtnerProducto, 
+        obtenerProductoporId,
         actualizarProducto, 
         borrarProducto } = require('../controllers/productos');
 
@@ -23,6 +24,10 @@ const router =Router();
 router.get('/',obtnerProductos)
 
 router.get('/2', obtnerProducto )
+
+router.get('/:id', obtnerProducto )
+
+router.get('/flights/:id/passengers', obtenerProductoporId)
 
 // Crear Categoria cualquier - privado - token valido
 router.post('/', 

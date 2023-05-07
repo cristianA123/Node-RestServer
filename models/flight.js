@@ -1,5 +1,9 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database/connection');
+const Airplane = require("./airplane");
+// const BoardingPass = require("./boardingPass");
+const BoardingPass = db.define('boarding_pass');
+
 
 const Flight = db.define('flight', {
     flight_id: {
@@ -22,13 +26,16 @@ const Flight = db.define('flight', {
     airplane_id: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'airplane',
+          model: Airplane,
           key: 'airplane_id',
         },
-    },
-}, {
+    }
+}, 
+{
     freezeTableName: true,
     timestamps: false
-  })
+})
+Flight.belongsTo(Airplane, { foreignKey: 'airplane_id' });
+Flight.hasMany(BoardingPass, { foreignKey: 'flight_id' });
 
 module.exports = Flight

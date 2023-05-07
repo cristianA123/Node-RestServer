@@ -9,6 +9,7 @@ const Flight = require('../models/flight');
 const Purchase = require('../models/purchase');
 const Seat = require('../models/seat');
 const SeatType = require('../models/seatType');
+const db = require('../database/connection');
 
 // OBTENER CATEGORIAS
 const obtnerProductos = async (req = request, res= response) => {
@@ -51,8 +52,77 @@ const obtnerProducto = async (req = request, res= response) => {
     res.json({
         pas
     });
+
+
+
 };
 
+const obtenerProductoporId = async (req = request, res= response) => {
+
+    // const pas = await Airplane.findAll();
+    // const pas = await BoardingPass.findAll();
+    // const pas = await Flight.findAll();
+    // const pas = await Passenger.findAll();
+    // const pas = await Purchase.findAll();
+    const { id } = req.params;
+
+    // const pas = await Flight.findAll({
+    //     where: { 
+    //         flight_id: id 
+    //     },
+    //     include: [
+    //         { 
+    //             model: BoardingPass,
+    //             attributes: [
+    //                 'boarding_pass_id',
+    //                 'purchase_id',
+    //                 'passenger_id',
+    //                 'seat_id',
+    //                 'seat_type_id',
+    //                 'flight_id'
+    //             ],
+    //             include: [
+    //                 {model: Passenger,
+    //                  attributes: [
+    //                      'passenger_id',
+    //                      'dni',
+    //                      'name',
+    //                      'age',
+    //                      'country'
+    //                  ]}
+    //             ]
+    //         }
+    //     ],
+    // });
+    // const pas = await SeatType.findAll()
+    let arreglo1 = await Flight.findByPk(id);
+      
+    const arreglo2 = await db.query(`
+    SELECT passenger.*, boarding_pass.boarding_pass_id , boarding_pass.purchase_id ,boarding_pass.seat_id ,boarding_pass.seat_type_id , boarding_pass.flight_id 
+    FROM boarding_pass
+    INNER JOIN passenger  ON passenger.passenger_id = boarding_pass.passenger_id
+    WHERE boarding_pass.flight_id = `+ id + `
+    ORDER BY boarding_pass.passenger_id DESC
+    LIMIT 10
+    `);
+
+    //   json = JSON(arreglo1)
+
+    //   arreglo1.push(arreglo2)  
+    data = {
+        ...arreglo1.toJSON(),
+        passengers: arreglo2[0]
+    }
+      
+      res.json({
+        // arreglo2,
+        code: 200,
+        arreglo2
+      });
+
+
+
+};
 // CREAR Producto ******************************************************
 const crearProducto = async (req, res =response) => {
 
@@ -177,5 +247,6 @@ module.exports = {
     obtnerProducto,
     crearProducto,
     actualizarProducto,
-    borrarProducto
+    borrarProducto,
+    obtenerProductoporId
 }
