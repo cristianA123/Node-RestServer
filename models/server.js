@@ -46,6 +46,10 @@ class Server{
         } catch (error) {
             // throw new Error('No se pudo conectar a la bd == ', error.message)
             console.log(error.message);
+            return {
+                code: 400,
+                errors: "could not connect to db"
+            }
         }
 
     }

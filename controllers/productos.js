@@ -1,5 +1,4 @@
 const { response, request } = require( 'express' );
-
 const bcryptjs = require('bcryptjs');
 const { Categoria, Producto } =  require('../models');
 const Passenger = require('../models/passenger');
@@ -10,6 +9,9 @@ const Purchase = require('../models/purchase');
 const Seat = require('../models/seat');
 const SeatType = require('../models/seatType');
 const db = require('../database/connection');
+const { QueryTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
+
 
 // OBTENER CATEGORIAS
 const obtnerProductos = async (req = request, res= response) => {
@@ -97,27 +99,27 @@ const obtenerProductoporId = async (req = request, res= response) => {
     // const pas = await SeatType.findAll()
     let arreglo1 = await Flight.findByPk(id);
       
-    const arreglo2 = await db.query(`
-    SELECT passenger.*, boarding_pass.boarding_pass_id , boarding_pass.purchase_id ,boarding_pass.seat_id ,boarding_pass.seat_type_id , boarding_pass.flight_id 
-    FROM boarding_pass
-    INNER JOIN passenger  ON passenger.passenger_id = boarding_pass.passenger_id
-    WHERE boarding_pass.flight_id = `+ id + `
-    ORDER BY boarding_pass.passenger_id DESC
-    LIMIT 10
+    const suma = await db.query(`
+    SELECT 1+1
     `);
+
+    // const users = await sequelize.query("SELECT * FROM passenger", { type: QueryTypes.SELECT });
+
+    console.log(suma)
 
     //   json = JSON(arreglo1)
 
     //   arreglo1.push(arreglo2)  
-    data = {
-        ...arreglo1.toJSON(),
-        passengers: arreglo2[0]
-    }
+    // data = {
+    //     ...arreglo1.toJSON(),
+    //     passengers: arreglo2
+    // }
       
       res.json({
         // arreglo2,
+        users,
         code: 200,
-        arreglo2
+        suma
       });
 
 

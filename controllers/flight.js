@@ -12,40 +12,41 @@ const db = require('../database/connection');
 // OBTENER CATEGORIAS
 const getFlightByIdWithPassenger= async (req = request, res= response) => {
 
-    // const { id } = req.params;
-
-    // let flight = await Flight.findByPk(id);
-      
-    // const passengers = await db.query(`
-    // SELECT passenger.* , boarding_pass.boarding_pass_id , boarding_pass.purchase_id ,boarding_pass.seat_id ,boarding_pass.seat_type_id , boarding_pass.flight_id 
-    // FROM flight
-    // INNER JOIN boarding_pass  ON flight.flight_id = boarding_pass.flight_id 
-    // INNER JOIN passenger  ON boarding_pass.passenger_id  = passenger.passenger_id
-    // WHERE boarding_pass.flight_id = `+ id + `
-    // `);
+    try {
+        
+        const { id } = req.params;
     
-    
-    // data = {
-    //     ...flight.toJSON(),
-    //     passengers: passengers
-    // }
-    // const pas2 = JSON.stringify(data)
-    // const data2 = convertKeysToCamelCase(JSON.parse(pas2));
-      
-    //   res.json({
-    //     code: 200,
-    //     data
-    //   });
+        let flight = await Flight.findByPk(id);
+          
+        const passengers = await db.query(`
+        SELECT passenger.*, boarding_pass.boarding_pass_id , boarding_pass.purchase_id ,boarding_pass.seat_id ,boarding_pass.seat_type_id , boarding_pass.flight_id 
+        FROM boarding_pass
+        INNER JOIN passenger  ON passenger.passenger_id = boarding_pass.passenger_id
+        WHERE boarding_pass.flight_id = `+ id + `
+        ORDER BY boarding_pass.passenger_id DESC
+        LIMIT 2
+        `);
+        
+        
+        const data = {
+            ...flight.toJSON(),
+            passengers: passengers[0]
+        }
+        const pas2 = JSON.stringify(data)
+        const data2 = convertKeysToCamelCase(JSON.parse(pas2));
+          
+        return res.json({
+            code: 200,
+            data: data2,
+          });
+    } catch (error) {
+        return res.json({
+            code: 404,
+            data: {},
+          });
+    }
 
 
-
-      
-    
-    
-
-    // res.json({
-    //     passengers
-    // });
 };
 
 convertKeysToCamelCase = (obj) => {
