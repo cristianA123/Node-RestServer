@@ -22,14 +22,7 @@ const router =Router();
 // OBTENER TODAS LAS CATEGORIAS
 router.get('/',obtnerProductos)
 
-router.get('/:id',
-[
-    check('id',"El id del producto no es ID valido").isMongoId() ,
-    check('id').custom( existeProductoporId ),
-    // check('id').custom( estadoActivoProducto ),
-    validarCampos
-]
-, obtnerProducto )
+router.get('/2', obtnerProducto )
 
 // Crear Categoria cualquier - privado - token valido
 router.post('/', 
