@@ -1,4 +1,13 @@
 # Node-Cascaron
+ ## Instalacion:
+ 1. npm i
+ 2. crear el .env y copar los datos de .example.env
+ 3. Tener la cadena de coneccion de Mongo
+
+## Tecnologias Utilizadas
+* Node
+* Mongo
+* Sequelize
 
 # PARA CREAR UN TAG
   * git tag -a v0.0.2 -m "modulo 9 terminado"
