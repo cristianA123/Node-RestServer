@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const { crearProducto, 
         obtnerProductos, 
         obtnerProducto, 
+        obtenerProductoporId,
         actualizarProducto, 
         borrarProducto } = require('../controllers/productos');
 
@@ -22,14 +23,11 @@ const router =Router();
 // OBTENER TODAS LAS CATEGORIAS
 router.get('/',obtnerProductos)
 
-router.get('/:id',
-[
-    check('id',"El id del producto no es ID valido").isMongoId() ,
-    check('id').custom( existeProductoporId ),
-    // check('id').custom( estadoActivoProducto ),
-    validarCampos
-]
-, obtnerProducto )
+router.get('/2', obtnerProducto )
+
+router.get('/:id', obtnerProducto )
+
+router.get('/flights/:id/passengers', obtenerProductoporId)
 
 // Crear Categoria cualquier - privado - token valido
 router.post('/', 

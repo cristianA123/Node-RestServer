@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",
-    "dev":"nodemon app"
+    "dev": "nodemon app"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,8 @@
     "google-auth-library": "^7.6.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.7",
+    "mysql2": "^3.3.0",
+    "sequelize": "^6.31.1",
     "uuid": "^8.3.2"
   }
 }

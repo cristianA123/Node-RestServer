@@ -1,7 +1,7 @@
 const express = require('express')
 var cors = require('cors');
-const { dbConnection } = require('../database/connection.js');
 const fileUpload = require('express-fileupload');
+const db = require('../database/connection.js');
 
 class Server{
 
@@ -20,6 +20,8 @@ class Server{
             roles : "/api/roles", 
             solicitudes : "/api/solicitudes", 
 
+            flight: '/flights'
+
         }
 
         //Conectar a la base de datos:
@@ -34,7 +36,19 @@ class Server{
     }
 
     async conectarBD(){
-        await dbConnection();
+        try {
+            await db.authenticate();
+            console.log('DB online');
+            
+        } catch (error) {
+            // throw new Error('No se pudo conectar a la bd == ', error.message)
+            console.log(error.message);
+            return {
+                code: 400,
+                errors: "could not connect to db"
+            }
+        }
+
     }
 
     middlewares(){
@@ -67,6 +81,8 @@ class Server{
         this.app.use( this.paths.uploads, require('../routes/uploads.js') );
         this.app.use( this.paths.roles, require('../routes/roles.js') );
         this.app.use( this.paths.solicitudes, require('../routes/solicitudes.js') );
+
+        this.app.use( this.paths.flight, require('../routes/flight.js') );
 
     }
 

@@ -1,30 +1,22 @@
-const mongoose = require('mongoose');
+
+const { Sequelize } = require('sequelize');
+const { QueryTypes } = require('sequelize');
 
 
-const dbConnection = async()=>{
+const db = new Sequelize('airline', 'bsale_test', 'bsale_test',{
+    host: 'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com',
+    dialect: 'mysql',
+})
 
-    try {
-
-        await mongoose.connect( process.env.MONGO_CNN,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false
-        });
-
-        console.log("base de datos online");
-
-        
-    } catch (error) {
-        console.log(error)
-
-    }
-    
-};
-
-
-
-
-module.exports = {
-    dbConnection
+async function prueba() {
+    const suma = await db.query('SELECT 1+2 AS result LIMIT 1', {
+      type: QueryTypes.SELECT,
+    });
+    console.log(suma);
 }
+  
+prueba()
+
+
+
+module.exports = db
