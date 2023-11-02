@@ -21,11 +21,8 @@ class Server{
             solicitudes : "/api/solicitudes", 
 
         }
-        // this.usuariosPath ="/api/usuarios" 
-        // this.authPath ="/api/auth" 
-        // this.authCategoria ="/api/categorias" 
 
-        //Conectyar a la base de datos:
+        //Conectar a la base de datos:
         this.conectarBD();
         
         // Middlewares
